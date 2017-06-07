@@ -1,0 +1,64 @@
+<ion-view hide-nav-bar="true" id="page6">
+    <ion-content padding="true">
+        
+        <div class="principal-header" >
+            <div class="row">
+                <div class="col col-50" align="center">
+                    <img src="img/pruebas_saber.jpg" width=178 height=100  alt="Pruebas Saber">
+                </div>
+                <div class="col col-50">
+                    <h1>Pruebas Saber</h1>
+                </div>
+            </div>
+        </div>
+        
+        <form id="question_list" class="list">
+            <h3 id="page3-heading3" style="color:#000000;">Preguntas seleccionadas <span style="margin-left:5em"> {{data.numberofquestions}}/{{data.max_questions}} </span></h3>
+
+            <ion-list>
+                <div ng-repeat="dba in dbas">
+                    <div class="list card">
+                        <div class="item item-body">
+                            <ion-item class="item-stable"
+                                      ng-click="toggleGroup(dba)"
+                                      ng-class="{active: isGroupShown(dba)}">
+                                <i class="icon" ng-class="isGroupShown(dba) ? 'ion-minus' : 'ion-plus'"></i>
+                                &nbsp;
+                                DBA <b>{{dba.id_name}}</b>: <p style="margin-left:2.5em" align="justify"> {{dba.name}} </p>
+                            </ion-item>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-repeat="question in dba.questions">
+                        <div class="col-90">
+                            <ion-checkbox class="item-accordion"                                              
+                                          name="{{question.id}}"
+                                          ng-click="setCounter($event)"
+                                          ng-show="isGroupShown(dba)"><p style="margin-left:2.5em"> {{question.header_question}}</p> 
+
+                            </ion-checkbox>
+                        </div>
+                        <div class="col-10" style="vertical-align:central">
+                            <a id="button_{{question.id}}" class="button button-royal" ng-click="showDetail($event,question)" ng-show="isGroupShown(dba)" style="width:100%"><i class="icon" ng-class="'ion-eye'"></i></a>                                
+                        </div>
+                    </div>
+                </div>
+            </ion-list>
+            
+        </form>
+        
+        <div id="page-button-bar9" class="button-bar">
+            <div class="row">
+                <div class="col-33">
+                    <a id="page-button11" class="button button-assertive  button-block" ng-click="Return()" ng-if="current_question != 0">Atrás</a>
+                </div>
+                <div class="col-33">
+                </div>
+                <div class="col-33">
+                    <a id="page-button11" class="button button-positive  button-block" ng-click="showPopup()">Iniciar prueba</a>
+                </div>
+            </div>
+        </div>
+        
+    </ion-content>
+</ion-view>

@@ -1,0 +1,94 @@
+<ion-view hide-nav-bar="false" id="page6">
+  <div class="bar bar-light" id="header-data-test" style="height:initial">
+  <div class="card" id="test-data">
+<!-- -->
+    <div class="item item-text-wrap">
+      <div class="row  responsive-md" id="fixed-data">
+        <div class="col-20"><h2>Nombre de la Prueba: </h2><p>{{header_data.test}}</p></div>
+        <div class="col-20" id="name-label"><h2>Nombre del estudiante:</h2> <p>{{header_data.student}}</p></div>
+        <div class="col-20"><h2>Asignatura:</h2><p> {{header_data.asignature}}</p></div>
+        <div class="col-20" ><h2>Curso:</h2> <p id="course">{{header_data.level}}</p></div>
+      </div>
+      <div class="row time-header responsive-md">
+        <div class="col-33 time-lab"><h2> </h2></div>
+        <div class="col-10 time-lab"><h2> </h2></div>
+        <div class="col-25" id="question_counter"><h2>Pregunta: {{current_question+1}}/{{max_questions}}</h2></div>
+        <div class="col-25" id="time-count"><div class="time-tex-div" id ="time_counter"> {{globals.total_time}} </div></h2></div>
+      </div>
+    </div>
+  </div>
+</div>
+    <ion-content padding="true" id="has-second-header">
+      <div class="questions-container">
+        <div class="card" id="empty-space">
+            <div class="row responsive-md">
+              <div class="col-20"><h2>Nombre de la Prueba: </h2><p>-</p></div>
+              <div class="col-20" ><h2>Nombre del estudiante:</h2> <p>-</p></div>
+              <div class="col-20"><h2>Asignatura:</h2><p>-</p></div>
+              <div class="col-20 time-lab"><h2>Curso:</h2> <p>-</p></div>
+            </div>
+            <div class="row  time-lab">
+              <div class="col-33"><h1>Pregunta:</h1> <p>-</p></div>
+              <div class="col-33" ><h1>Pregunta:</h1> <p>-</p></div>
+            </div>
+            <div class="row time-lab">
+              <div class="col-33"><h1>Pregunta:</h1> <p>-</p></div>
+              <div class="col-33" ><h1>Pregunta:</h1> <p>-</p></div>
+            </div>
+
+        </div>
+
+
+
+        <div id="page-markdown1">
+            <h4>{{question.header_question}}
+            </h4>
+        </div>
+
+        <div class="card" id="mathContainer" ng-if="question.type=='2'">
+            {{question.file}}
+        </div>
+        <div class="card" id="mathContainer" ng-if="question.type=='1'">
+            <div>
+            <button id="load" class="button button-balanced" ng-click="loadPDFAng(question.file)">Cargar lectura</button>
+            <button id="prev" class="button button-balanced" style="display:none">Pagina Anterior</button>
+            <button id="next" class="button button-balanced" style="display:none">Pagina Siguiente</button>
+            <span id="detail" style="display:none">Pagina: <span id="page_num"></span> / <span id="page_count"></span></span>
+            </div>
+            <canvas id="pdf_viewer"  style="width:100%;display:none"></canvas>
+        </div>
+        <div class="card question-with-image" id="mathContainer" ng-if="question.type=='3'" >
+            <h4 class="generic-text-image">Imagen relacionada</h4>
+            <img src="contents/{{question.file}}" class="row" >
+        </div>
+
+        <form id="answer_list" class="list">
+          <h4 class="generic-text">posibles respuestas</h4>
+            <ion-list>
+            <ion-radio ng-model="data.answer" ng-value="{{$index}}" ng-repeat="answer in question.answers track by $index" value="{{$index}}" name="respuesta">{{answer.header_answer}}</ion-radio>
+
+            </ion-list>
+
+        </form>
+
+        <div id="page-button-bar9" class="button-bar">
+            <div class="row responsive-md">
+                <div class="col-33">
+                    <a id="page-button11" class="button button-positive  button-block back-button" ng-click="saveAndReturn()" ng-if="current_question!=0">
+                      <span></span>
+                      Atrás
+                    </a>
+                </div>
+                <div class="col-33">
+                </div>
+                <div class="col-33">
+                    <a id="page-button11" class="{{option == 'Terminar Prueba' ? 'button button-positive button-block finish-button' : 'button button-positive button-block continue-button'}}" ng-click="saveAndContinue()">
+                      <span></span>
+                      {{option}}
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
+    </ion-content>
+</ion-view>
