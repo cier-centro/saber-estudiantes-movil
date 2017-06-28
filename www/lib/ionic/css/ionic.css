@@ -9553,17 +9553,25 @@ ion-content.scroll-content.ionic-scroll {
   .start-page-card .item-text-wrap {
     box-shadow: 0 0px 0px !important; }
 
+.item.item-select select {
+  padding-left: 0px;
+  direction: ltr !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  position: relative !important; }
+
 div#page-markdown1 {
   background-color: white;
   padding: 10;
   box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.4); }
   div#page-markdown1 h4 {
-    color: black;
-    font-weight: 600; }
+    color: black; }
 
 .answers {
   width: 90%;
   margin: 2% auto; }
+  .answers .MathJax_SVG_Display {
+    margin: 0px !important; }
   .answers .item-divider {
     background-color: #50bbb5; }
     .answers .item-divider p {
@@ -9574,7 +9582,9 @@ div#page-markdown1 {
   .answers .card, .answers .item-text-wrap {
     width: 100%;
     background-color: white !important;
-    box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.3) !important; }
+    box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.3) !important;
+    margin-top: 0px;
+    margin-bottom: 0px; }
     .answers .card .item.item-text-wrap, .answers .item-text-wrap .item.item-text-wrap {
       padding: 10px;
       border: none; }
@@ -9619,7 +9629,7 @@ div #personal-information {
     background-color: transparent;
     box-shadow: 0 0px 0px !important; }
     .principal-header.upload-questionary .card .list, .principal-header.upload-questionary .item-text-wrap .list {
-      border: 4px solid #bde1e3; }
+      border: 4px solid white; }
     .principal-header.upload-questionary .card h1, .principal-header.upload-questionary .item-text-wrap h1 {
       font-weight: 600;
       color: white;
@@ -9638,6 +9648,20 @@ div #personal-information {
         margin: 0px; }
       .principal-header.upload-questionary .button-bar a:nth-child(2) {
         margin-top: 20px; } }
+
+/*
+.page-break{
+  page-break-after: always;
+}*/
+h1, h2, h3, h4, h5, p {
+  page-break-inside: avoid !important;
+  break-inside: avoid !important; }
+
+#card-block {
+  display: block;
+  page-break-inside: avoid !important;
+  page-break-after: always !important;
+  break-after: always !important; }
 
 .start-buttons {
   vertical-align: middle;
@@ -9742,6 +9766,9 @@ div #personal-information {
 .charge-test-button span {
   background: url("../../../img/img_spritesheet.png") no-repeat;
   background-position: -112px -235px !important; }
+
+#start-button a {
+  width: 80%; }
 
 /**
  * Header Styles
@@ -9868,22 +9895,22 @@ div #start-button {
     background-color: #bee1e3;
     margin-left: -20px;
     box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.4); }
-    #test-data #fixed-data .col-20 {
+    #test-data #fixed-data .col-20, #test-data #fixed-data .col-40 {
       margin: 20px; }
-      #test-data #fixed-data .col-20 h2 {
+      #test-data #fixed-data .col-20 h2, #test-data #fixed-data .col-40 h2 {
         color: #1f3542 !important;
         font-weight: 600 !important; }
-      #test-data #fixed-data .col-20 p {
+      #test-data #fixed-data .col-20 p, #test-data #fixed-data .col-40 p {
         padding: 5px;
         background-color: #50bbb5;
         color: white; }
       @media (max-width: 767px) {
-        #test-data #fixed-data .col-20 {
+        #test-data #fixed-data .col-20, #test-data #fixed-data .col-40 {
           margin: 5px !important; } }
-      #test-data #fixed-data .col-20 #course {
+      #test-data #fixed-data .col-20 #course, #test-data #fixed-data .col-40 #course {
         width: 70%; }
         @media (max-width: 767px) {
-          #test-data #fixed-data .col-20 #course {
+          #test-data #fixed-data .col-20 #course, #test-data #fixed-data .col-40 #course {
             width: 100%; } }
   @media (max-width: 767px) {
     #test-data {
@@ -9911,10 +9938,11 @@ div #start-button {
 #time-count {
   background: url("../../../img/bg-timer.png") no-repeat;
   overflow: hidden;
-  padding: 10px;
-  min-height: 40px; }
+  padding: 10px 5px 10px 0px;
+  min-height: 40px;
+  white-space: nowrap; }
   #time-count #time_counter {
-    margin-left: 35px;
+    margin-left: 40px;
     font-weight: 600;
     color: #1f3542; }
 
@@ -9932,6 +9960,14 @@ div #start-button {
   box-shadow: 0 0px 0px !important; }
   .card .item.item-text-wrap, .item-text-wrap .item.item-text-wrap {
     box-shadow: 0 0px 0px !important; }
+
+@media (max-width: 767px) {
+  .small-label {
+    width: 45% !important; } }
+
+@media (max-width: 767px) {
+  .big-label {
+    width: 100% !important; } }
 
 #empty-space {
   box-shadow: 0 0px 0px !important; }
@@ -9966,10 +10002,12 @@ div #start-button {
 
 #mathContainer {
   overflow: normal !important; }
-  #mathContainer .MathJax_SVG_Display span {
-    background: white;
-    padding: 30px;
-    box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.4); }
+  #mathContainer .MathJax_SVG_Display {
+    background-color: white;
+    margin-top: 0px; }
+    #mathContainer .MathJax_SVG_Display span {
+      background: white;
+      padding: 30px; }
   #mathContainer .question-with-image {
     box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.4) !important; }
   #mathContainer .generic-text-image {
@@ -9984,6 +10022,9 @@ div #start-button {
     padding-top: 10px;
     background-color: white;
     box-shadow: 0px 70px 15px -70px rgba(0, 0, 0, 0.4); }
+
+#prev, #next, #detail {
+  display: none !important; }
 
 body * {
   font-family: 'arial'; }
@@ -10019,7 +10060,7 @@ ion-content {
   ion-content .item-select {
     height: 55px !important; }
   ion-content .item-select, ion-content .item-input {
-    border: 4px solid #bde1e3;
+    border: 4px solid white;
     -webkit-box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.3);
     box-shadow: 6px 6px 6px -3px rgba(0, 0, 0, 0.3); }
@@ -10066,5 +10107,56 @@ ion-content {
 @media (min-width: 768px) {
   .upload-buttons {
     padding: 0 6%; } }
+/**
+ * Warning Message Styles
+ * --------------------------------------------------
+ */
+.warning-message {
+  background: white;
+  margin: 0 5% 50px;
+  -webkit-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 10px 2px rgba(0, 0, 0, 0.25); }
+  .warning-message .row {
+    position: relative; }
+    .warning-message .row .warning-icon {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 80px;
+      -moz-box-flex: 0;
+      -moz-flex: 0 0 80px;
+      -ms-flex: 0 0 80px;
+      flex: 0 0 80px;
+      max-width: 80px;
+      height: 80px;
+      background: url("../../../img/img_spritesheet.png") no-repeat -6px -6px;
+      margin: 0 10px; }
+    .warning-message .row .warning-text {
+      padding-right: 55px;
+      color: black;
+      font-size: 15px; }
+    .warning-message .row .button-container {
+      position: absolute;
+      top: 5px;
+      right: 7px;
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 50px;
+      -moz-box-flex: 0;
+      -moz-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px;
+      max-width: 50px;
+      height: 50px; }
+    .warning-message .row .button {
+      min-height: 40px;
+      min-width: 40px;
+      padding: 0;
+      background: #eb8368;
+      color: white;
+      border: none;
+      border-radius: 0; }
+      .warning-message .row .button:before {
+        padding: 0; }
+      .warning-message .row .button:hover {
+        background: #eb5a47; }
 
 /*# sourceMappingURL=ionic.css.map */

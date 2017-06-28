@@ -40,7 +40,7 @@ cont_angular.controller('askTestCtrl', ['$scope', '$stateParams', '$ionicPopup',
             for (var id in user_answers) {
                 if (user_answers[id]["selected_index"] > 3) {
                     var alertPopup = $ionicPopup.alert({
-                        title: 'Reponda todas las preguntas',
+                        title: 'Responda todas las preguntas',
                         template: 'Debe Responder todas las preguntas para poder terminar la evaluacion.'
                     });
 
@@ -57,7 +57,6 @@ cont_angular.controller('askTestCtrl', ['$scope', '$stateParams', '$ionicPopup',
                 template: '¿Esta seguro de finalizar la prueba?'
             });
             confirmPopup.then(function (res) {
-                console.log(res)
                 if (res) {
                     clearInterval(timer);
                     $state.go("answersFeedback");

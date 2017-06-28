@@ -14,7 +14,20 @@ cont_angular.controller('createQuestionaryCtrl', ['$scope', '$stateParams', '$ht
               $state.go("askaquestion");
         }
 
+        $scope.randomQuestion = function(dba_set){
+
+          var max = dba_set.length-1;
+          var min = 0;
+          var index =  Math.floor(Math.random()*(max-min+1)+min);
+          var second = dba_set[index];
+          var max2 = second["questions"].length-1;
+          var min2 = 0;
+          var index2 =  Math.floor(Math.random()*(max2-min2+1)+min2);
+          return [index,index2]
+        }
+
         $scope.randomTest = function () {
+          if($scope.verifyData()){
           var url = "data/dbas/"+$scope.data.grade+$scope.data.id_asignature+".json";
 					if(ionic.Platform.isAndroid()){
 						url = "/android_asset/www/data/dbas/"+$scope.data.grade+$scope.data.id_asignature+".json";
@@ -27,6 +40,9 @@ cont_angular.controller('createQuestionaryCtrl', ['$scope', '$stateParams', '$ht
             test_name = $scope.data.test_name;
             selected_level=  $scope.data.grade;
             selected_asignare = $scope.data.id_asignature;
+            selected_questions = [];
+            selected_dbas=[];
+            $scope.dbas = [];
             for (var i = 0; i < inputs.length; i++) {
                 selected_dbas.push(inputs[i].id);
             }
@@ -35,22 +51,27 @@ cont_angular.controller('createQuestionaryCtrl', ['$scope', '$stateParams', '$ht
 							url = "/android_asset/www/data/questions.json";
 						}
 						$http.get(url).success(function(response){
-							console.log(selected_dbas)
-							console.log(response)
 							for (var o in selected_dbas){
-								console.log(o)
 								if (response[selected_dbas[o]]){
 									$scope.dbas.push(response[selected_dbas[o]])
 								}
 							}
-							for (var i in $scope.dbas) {
-                  for (var j in $scope.dbas[i]["questions"]) {
-                      if (selected_questions.length < max_questions) {
-                          if (Math.random() > 0.5) {
-                              selected_questions.push($scope.dbas[i]["questions"][j].id);
-                          }
-                      }
+              console.log($scope.dbas)
+              var qset=[];
+              var added_q = 0;
+              while(added_q<max_questions){
+                var n_q= $scope.randomQuestion($scope.dbas)
+                var add= true
+                for(var e in qset){
+                  if(qset[e][0]==n_q[0] && qset[e][1]==n_q[1]){
+                    add=false
                   }
+                }
+                if(add){
+                  selected_questions.push($scope.dbas[n_q[0]]["questions"][n_q[1]].id);
+                  qset.push(n_q)
+                  added_q++;
+                }
               }
 							shuffle(selected_questions);
 							questions_data = $scope.dbas;
@@ -59,9 +80,34 @@ cont_angular.controller('createQuestionaryCtrl', ['$scope', '$stateParams', '$ht
             })
           })
         }
+        }
 
         $scope.returnToMain = function(){
           $state.go("start")
+        }
+
+        $scope.verifyData=function(){
+          var valid=0;
+          if(typeof $scope.data.name=="undefined"){
+            valid++;
+          }
+          if(typeof $scope.data.test_name=="undefined"){
+            valid++;
+          }
+          if($scope.data.grade==0){
+            valid++;
+          }
+          if($scope.data.id_asignature=="NA"){
+            valid++;
+          }
+          if(valid>0){
+            var alertPopup = $ionicPopup.alert({
+                title: 'Datos faltantes',
+                template: 'Debe agregar todos sus datos para continuar'
+            });
+            return false;
+          }
+          return true;
         }
 
 
