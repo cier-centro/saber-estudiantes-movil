@@ -26,6 +26,11 @@ cont_angular.controller('createQuestionaryCtrl', ['$scope', '$stateParams', '$ht
           return [index,index2]
         }
 
+        // boton cerrar
+        $scope.hide=function(a){
+          document.getElementById(a).style.display="none";
+        }
+
         $scope.randomTest = function () {
           if($scope.verifyData()){
           var url = "data/dbas/"+$scope.data.grade+$scope.data.id_asignature+".json";
